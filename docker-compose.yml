@@ -1,0 +1,19 @@
+version: "3.3"
+ 
+services:
+  epidelta:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: eptrg/epidelta_prod
+    container_name: epidelta_prod
+    ports:
+      - "3405:3838"
+    environment:
+      - APPLICATION_LOGS_TO_STDOUT=false
+    environment:
+      - TARGET=LIVE
+    restart: unless-stopped
+    volumes:
+      - './logs:/var/log/shiny-server'
+      - './app:/srv/shiny-server'
