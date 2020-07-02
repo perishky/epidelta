@@ -52,8 +52,8 @@ p.threshold <- 1e-7
 ## Text
 ############
 
-reference <- paste0("Preprint available: Mulder, R.H. <i>et al.</i> (2020) .",
-		    "<a href='https://doi.org/10.1101/2020.06.09.142620' >",
+reference <- paste0("Preprint available: Mulder, R.H. <i>et al.</i> ",
+		    "<a href='https://doi.org/10.1101/2020.06.09.142620'>",
  		    "Epigenome-wide change and variation in DNA methylation from birth to late adolescence", 
 		    "</a>. ", 
 		    "bioRxiv 2020.06.09.142620")
@@ -180,7 +180,6 @@ server <- function(input, output) {
 	     show("cpg_list_options") &
              show("download_button") &
              show("info") &
-             show("info_button") &
              hide("disclaimer"))
         else
             (hide("update") &
@@ -202,6 +201,7 @@ server <- function(input, output) {
                  paste(input$typeCpG, "is an unknown CpG site identifier.")))
 	show("model2_title")
 	show("model3_title")
+	show("info_button")
         input$typeCpG
     })
 
@@ -241,14 +241,14 @@ server <- function(input, output) {
                                              paste(model, variable_selections[[model]], sep=".")))
         names(variable_selections) <- variable_selections
         variable_selections <- gsub(" ", "", variable_selections)
-        variable_selections <- gsub("([0-9]+)y", "\\1", variable_selections)
+        variable_selections <- gsub("at([0-9]+)y", "\\1", variable_selections)
         
         stat_selections <- list("b"="estimate",
                                 "se"="se",
                                 "p"="p",
                                 "inter-individual variance, sd"="rand.sd",
                                 "inter-individual variance, p"="rand.p")
-        
+
         sapply(stat_selections, function(stat)
                sapply(variable_selections, function(var) {
                    if (grepl("M3",var) && grepl("sex",var) && grepl("rand",stat))
