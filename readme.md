@@ -11,7 +11,7 @@ and [Generation R](https://generationr.org.uk/).
 > Bastiaan T. Heijmans, Tom R. Gaunt, Janine F. Felix, Vincent
 > W. V. Jaddoe, Marian J. Bakermans-Kranenburg, Henning Tiemeier,
 > Caroline L. Relton, Marinus H. van IJzendoorn, Matthew Suderman.
-> [https://doi.org/10.1101/2020.06.09.142620](Epigenome-wide change and variation in DNA methylation from birth to late adolescence)
+> [Epigenome-wide change and variation in DNA methylation from birth to late adolescence](https://doi.org/10.1101/2020.06.09.142620)
 > bioRxiv 2020.06.09.142620; doi: https://doi.org/10.1101/2020.06.09.142620
 
 The app is implemented in R
