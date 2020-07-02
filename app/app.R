@@ -52,7 +52,7 @@ p.threshold <- 1e-7
 ## Text
 ############
 
-reference <- "Mulder, <i>et al</i>. <a href='https://doi.org/10.1101/2020.06.09.142620'>Epigenome-wide change and variation in DNA methylation from birth to late adolescence</a> bioRxiv 2020.06.09.142620"
+reference <- "Mulder, <i>et al</i>. <b>Epigenome-wide change and variation in DNA methylation from birth to late adolescence</b>. bioRxiv 2020.06.09.142620 https://doi.org/10.1101/2020.06.09.142620"
 
 choices <- list("all"=1,
                 "M1 change estimate Bonferroni significant (1E-07)"=2,
@@ -66,14 +66,14 @@ declaration <- "By checking this box, I declare that I have read and agree with 
 
 disclaimer <- "Disclaimer<br/>The data are provided 'as is'. The party providing the data ('Provider') makes no representations and extends no warranties of any kind, either expressed or implied with respect to the data, such as but not limited to any representation or warranty on accuracy, completeness, availability, accessibility, fitness for a particular purpose, or that the use of the data will not infringe any rights of third parties. The Provider shall not be liable for any liability or damages with respect to any claim by the recipient or any third party arising from the use and/or download of the data. Recipient shall indemnify and hold harmless the Provider and its trustees, officers, employees and students against any and all claims arising out of the use and/or download of the data by the recipient."
 
-info <- "<b>Info</b>
+info <- "<br><b>Info</b>
 Three linear mixed models were tested
 
-M1:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
+<b>M1</b>:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
 
-M2:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + &beta;<sub>3</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>2i</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + u<sub>3i</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
+<b>M2</b>:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + &beta;<sub>3</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>2i</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + u<sub>3i</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
 
-M3:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>Sex<sub>i</sub>Age<sub>ij</sub> u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
+<b>M3</b>:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>Sex<sub>i</sub>Age<sub>ij</sub> u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
 
 Covariates: batch, estimated white blood cells, gestational age, sex, cohort
 
@@ -85,15 +85,11 @@ info <- unlist(strsplit(info, split="\n"))
 info <- paste(info, collapse="<br/>")
 
 more_info <- "
-M1: This model was applied to identify CpGs that show an overall change in DNA methylation (DNAm) from birth to 18 years (i.e. fixed age effect), 
-as well as CpGs with inter-individual differences in change during that time (i.e. random age effect).
+<b>M1</b>: This model was applied to identify CpGs that show an overall change in DNA methylation (DNAm) from birth to 18 years (i.e. fixed age effect), as well as CpGs with inter-individual differences in change during that time (i.e. random age effect).
 
+Here, participants are denoted by i, time points by j, and sample plates by k.  M denotes DNAm level, &beta;<sub>0</sub> fixed intercept, u<sub>0i</sub> random intercept, &beta;<sub>1</sub> fixed age coefficient, u<sub>1i</sub> random age coefficient, u<sub>0k</sub> random intercept for sample plate. Hence, &beta;<sub>1</sub> represents the average change in DNAm per one year. Variability in this change amongst individuals was captured with u<sub>1i</sub>. To avoid problems with model identification, the random slope of age was uncorrelated to the random intercept (i.e. a diagonal random effects matrix was used).
 
-Here, participants are denoted by i, time points by j, and sample plates by k.  M denotes DNAm level, &beta;<sub>0</sub> fixed intercept, u<sub>0i</sub> random intercept, &beta;<sub>1</sub> fixed age coefficient, u<sub>1i</sub> random age coefficient, u<sub>0k</sub> random intercept for sample plate. 
-Hence, &beta;<sub>1</sub> represents the average change in DNAm per one year. Variability in this change amongst individuals was captured with u<sub>1i</sub>. 
-To avoid problems with model identification, the random slope of age was uncorrelated to the random intercept (i.e. a diagonal random effects matrix was used).
-
-M2: This model was applied to identify identify nonlinear changes in DNAm.
+<b>M2</b>: This model was applied to identify identify nonlinear changes in DNAm.
 
 Where a<sup>+</sup> = a if a>0 and 0 otherwise, so that &beta;<sub>2</sub> represents the average change in DNAm per year from 6 years of age onward, after accounting for the change per year from birth onward, as denoted by &beta;<sub>1</sub>. Likewise, &beta;<sub>3</sub> represents the average change in DNAm per year from 9 years of age onward, after accounting for the change per year from 6 years of age onward. 
 
@@ -101,10 +97,9 @@ Hence, with those variables we are able to detect slope changes at 6 and 9 years
 
 General linear hypothesis testing was applied to our fitted models to determine if there were changes in DNAm per year from 6-9 years and from 9-18 years.
 
-M3: This model was applied to identify CpGs for which DNAm changes differently over time for boys and girls.
+<b>M3</b>: This model was applied to identify CpGs for which DNAm changes differently over time for boys and girls.
 
 Sex<sub>i</sub> denotes the sex of child i and was used to interpret stable sex differences, &beta;<sub>2</sub>Sex<sub>i</sub>Age<sub>ij</sub> denotes sex ifferences in DNAm change (i.e. Sex by Age interaction effect). 
-
 
 "  
 more_info <- unlist(strsplit(more_info, split="\n"))
@@ -136,19 +131,20 @@ ui <- tagList(
                             
                             htmlOutput(outputId="disclaimer"),
                             
-                            textInput(inputId="typeCpG",label="CpG site of interest",placeholder="cg00029246",value="cg00029246"),
+                            hidden(textInput(inputId="typeCpG",label="CpG site of interest",placeholder="cg00029246",value="cg00029246")),
                             hidden(actionButton(inputId = "update",label = "Go")),
                             
-                            selectInput(inputId="cpg_list_options",label="load results",
-                                        choices=choices), 
-                            hidden(downloadButton(outputId="download_button", label="download")),
+                            hidden(selectInput(inputId="cpg_list_options",label="Load results",
+                                        choices=choices)), 
+                            hidden(downloadButton(outputId="download_button", label="download statistics")),
                             htmlOutput(outputId="info"),
                             width=2)),
                
-               mainPanel(fluidRow(column(5, h4("Model 2 - including nonlinear changes"),
+               mainPanel(fluidRow(column(6, hidden(htmlOutput(outputId="model2_title")),
                                          imageOutput(outputId = "Predicted_data_M2_bycohort")),
-                                  column(5, h4("Model 3 - including sex differences in change"),
+                                  column(6, hidden(htmlOutput(outputId="model3_title")),
                                          imageOutput(outputId = "Predicted_data_M3_bysex")),
+			 fluidRow(column(12, h1(""))),
                          fluidRow(column(8, tableOutput("table_results")),
                                   column(4,
                                          hidden(actionButton(inputId="info_button", label="more info")),
@@ -174,12 +170,16 @@ server <- function(input, output) {
     observeEvent(input$agree, {
         if(input$agree)
             (show("update") &
+	     show("typeCpG") &
+	     show("cpg_list_options") &
              show("download_button") &
              show("info") &
              show("info_button") &
              hide("disclaimer"))
         else
             (hide("update") &
+	     hide("typeCpG") &
+	     hide("cpg_list_options") &
              hide("download_button") &
              hide("info") &
              hide("info_button") &
@@ -194,9 +194,12 @@ server <- function(input, output) {
         validate(
             need(input$typeCpG %in% rownames(epidelta),
                  paste(input$typeCpG, "is an unknown CpG site identifier.")))
+	show("model2_title")
+	show("model3_title")
         input$typeCpG
     })
 
+    output$model2_title <- renderUI(HTML("<h4 style='white-space: nowrap'>Model 2- including nonlinear changes</h4>"))
     ##long plot from results                  
     output$Predicted_data_M2_bycohort <- renderImage({
         graphname_M2_bycohort <- cpgfigure(data_cpg(),'_M2_bycohort_200326.png')
@@ -210,7 +213,7 @@ server <- function(input, output) {
              alt = "Sorry something went wrong for this graph")
     }, deleteFile = FALSE)
     
-    
+    output$model3_title <- renderUI(HTML("<h4 style='white-space: nowrap'>Model 3 - including sex differences in change</h4>"))
     output$Predicted_data_M3_bysex <- renderImage({      
         graphname_M3_bysex    <- cpgfigure(data_cpg(),'_M3_bysex_200326.png')
         image_M3_bysex        <- graphname_M3_bysex
