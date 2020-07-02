@@ -52,11 +52,7 @@ p.threshold <- 1e-7
 ## Text
 ############
 
-reference <- "Mulder, <i>et al</i>.
-<a href='https://doi.org/10.1101/2020.06.09.142620'>
-Epigenome-wide change and variation in DNA methylation from birth to late adolescence
-</a>
-bioRxiv 2020.06.09.142620"
+reference <- "Mulder, <i>et al</i>.<a href='https://doi.org/10.1101/2020.06.09.142620'>Epigenome-wide change and variation in DNA methylation from birth to late adolescence</a>bioRxiv 2020.06.09.142620"
 
 choices <- list("all"=1,
                 "M1 change estimate Bonferroni significant (1E-07)"=2,
@@ -68,23 +64,20 @@ choices <- list("all"=1,
 
 declaration <- "By checking this box, I declare that I have read and agree with the disclaimer:"
 
-disclaimer <- "Disclaimer<br/>The data are provided 'as is'. The party providing the data ("Provider") makes no representations and extends no warranties of any kind, either expressed or implied with respect to the data, such as but not limited to any representation or warranty on accuracy, completeness, availability, accessibility, fitness for a particular purpose, or that the use of the data will not infringe any rights of third parties. The Provider shall not be liable for any liability or damages with respect to any claim by the recipient or any third party arising from the use and/or download of the data. Recipient shall indemnify and hold harmless the Provider and its trustees, officers, employees and students against any and all claims arising out of the use and/or download of the data by the recipient."
+disclaimer <- "Disclaimer<br/>The data are provided 'as is'. The party providing the data ('Provider') makes no representations and extends no warranties of any kind, either expressed or implied with respect to the data, such as but not limited to any representation or warranty on accuracy, completeness, availability, accessibility, fitness for a particular purpose, or that the use of the data will not infringe any rights of third parties. The Provider shall not be liable for any liability or damages with respect to any claim by the recipient or any third party arising from the use and/or download of the data. Recipient shall indemnify and hold harmless the Provider and its trustees, officers, employees and students against any and all claims arising out of the use and/or download of the data by the recipient."
 
-info <- "<b>Info</b>
+info <- "
 Three linear mixed models were tested
 
-M1:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + 
-u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
+M1:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
 
-M2:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + 
-&beta;<sub>3</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>2i</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + u<sub>3i</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + 
-u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
+M2:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + &beta;<sub>3</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>2i</sub>(Age<sub>ij-6</sub>)<sup>+</sup> + u<sub>3i</sub>(Age<sub>ij-9</sub>)<sup>+</sup> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
 
-M3:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + 
-&beta;<sub>2</sub>Sex<sub>i</sub>Age<sub>ij</sub> u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
+M3:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + &beta;<sub>2</sub>Sex<sub>i</sub>Age<sub>ij</sub> u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
 
 Covariates: batch, estimated white blood cells, gestational age, sex, cohort
-The graphs display the predicted data based on the models
+
+The graphs display the predicted data based on the models.
 
 
 "
@@ -100,7 +93,6 @@ Here, participants are denoted by i, time points by j, and sample plates by k.  
 Hence, &beta;<sub>1</sub> represents the average change in DNAm per one year. Variability in this change amongst individuals was captured with u<sub>1i</sub>. 
 To avoid problems with model identification, the random slope of age was uncorrelated to the random intercept (i.e. a diagonal random effects matrix was used).
 
-
 M2: This model was applied to identify identify nonlinear changes in DNAm.
 
 Where a<sup>+</sup> = a if a>0 and 0 otherwise, so that &beta;<sub>2</sub> represents the average change in DNAm per year from 6 years of age onward, after accounting for the change per year from birth onward, as denoted by &beta;<sub>1</sub>. Likewise, &beta;<sub>3</sub> represents the average change in DNAm per year from 9 years of age onward, after accounting for the change per year from 6 years of age onward. 
@@ -108,7 +100,6 @@ Where a<sup>+</sup> = a if a>0 and 0 otherwise, so that &beta;<sub>2</sub> repre
 Hence, with those variables we are able to detect slope changes at 6 and 9 years old. These slope changes were used to identify different types of nonlinear patterns. With u<sub>2i</sub> and u<sub>3i</sub> the inter-individual variation in slope changes at 6 and 9 years were captured, respectively. 
 
 General linear hypothesis testing was applied to our fitted models to determine if there were changes in DNAm per year from 6-9 years and from 9-18 years.
-
 
 M3: This model was applied to identify CpGs for which DNAm changes differently over time for boys and girls.
 
@@ -127,13 +118,13 @@ more_info <- paste(more_info, collapse="<br/>")
 ui <- tagList(               
   
     titlePanel(fluidRow(column(5, tags$h1(tags$strong(tags$code("THE EPIDELTA PROJECT"))), align="center"),
-                        column(2, tags$img(src=file.path(logoloc,'Logo_EMC.png'),
-                                           height = 137/2, width = 350/2, href="https://www.erasmusmc.nl/")),
-                        column(1, tags$img(src=file.path(logoloc,'Logo_GenR.png'),
-                                           height = 174/3, width = 240/3, href="https://generationr.nl/researchers/")),
-                        column(2, tags$img(src=file.path(logoloc,'Logo_BristolUni.png'),
-                                           height = 120/2.5, width = 418/2.5, href="https://www.bristol.ac.uk/")),
-                        column(1, tags$img(src=file.path(logoloc,'Logo_ALSPAC.png'),
+                        column(6, tags$img(src=file.path(logoloc,'Logo_EMC.png'),
+                                           height = 137/2, width = 350/2, href="https://www.erasmusmc.nl/"),
+                                   tags$img(src=file.path(logoloc,'Logo_GenR.png'),
+                                           height = 174/3, width = 240/3, href="https://generationr.nl/researchers/"),
+                                   tags$img(src=file.path(logoloc,'Logo_BristolUni.png'),
+                                           height = 120/2.5, width = 418/2.5, href="https://www.bristol.ac.uk/"),
+                                   tags$img(src=file.path(logoloc,'Logo_ALSPAC.png'),
                                            height = 229/2, width = 145/2, href="http://www.bristol.ac.uk/alspac/"))),
                windowTitle="epidelta project"),
     
@@ -151,19 +142,19 @@ ui <- tagList(
                             selectInput(inputId="cpg_list_options",label="load results",
                                         choices=choices), 
                             hidden(downloadButton(outputId="download_button", label="download")),
-                            
+                            htmlOutput(outputID="info"),
                             width=2)),
                
-               mainPanel(fluidRow(column(4, offset=0.5, h4("Model 2 - including nonlinear changes"),
+               mainPanel(fluidRow(column(5, h4("Model 2 - including nonlinear changes"),
                                          imageOutput(outputId = "Predicted_data_M2_bycohort")),
-                                  column(4, offset=1, h4("Model 3 - including sex differences in change"),
+                                  column(5, h4("Model 3 - including sex differences in change"),
                                          imageOutput(outputId = "Predicted_data_M3_bysex")),
-                                  column(2, offset=1.5, h4("Info"),
+                                  column(2, h4("Info"),
                                          hidden(htmlOutput(outputId="info")),
                                          hidden(actionButton(inputId="info_button", label="more info")),
                                          hidden(actionButton(inputId="info_button_less", label="less info")))), #
-                         fluidRow(column(6, tableOutput("table_results")),
-                                  column(3, hidden(htmlOutput(outputId="more_info")))))))
+                         fluidRow(column(10, tableOutput("table_results")),
+                                  column(2, hidden(htmlOutput(outputId="more_info")))))))
 
 
 ######################
@@ -214,8 +205,8 @@ server <- function(input, output) {
         
         list(src = image_M2_bycohort, 
              contentType = 'image/png',
-             width = 400*0.75,
-             height = 300*0.75,
+             width = 420*0.75,
+             height = 420*0.75,
              title = "Model 2 - nonlinear changes",            
              alt = "Sorry something went wrong for this graph")
     }, deleteFile = FALSE)
@@ -227,8 +218,8 @@ server <- function(input, output) {
         
         list(src = image_M3_bysex, 
              contentType = 'image/png',
-             width = 400*0.75,
-             height = 300*.75,
+             width = 420*0.75,
+             height = 420*.75,
              title = "Model 3 - sex differences",
              alt = "Sorry something went wrong for this graph")
     }, deleteFile = FALSE)
@@ -252,7 +243,7 @@ server <- function(input, output) {
         sapply(stat_selections, function(stat)
                sapply(variable_selections, function(var) {
                    if (grepl("M3",var) && grepl("sex",var) && grepl("rand",stat))
-                       return ""
+                       return("")
                    colname <- paste(var, stat, sep=".")
                    format(epidelta[data_cpg(),colname],digits=3,scientific=TRUE)
                }))
