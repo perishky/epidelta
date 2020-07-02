@@ -52,7 +52,7 @@ p.threshold <- 1e-7
 ## Text
 ############
 
-reference <- "Mulder, <i>et al</i>.<a href='https://doi.org/10.1101/2020.06.09.142620'>Epigenome-wide change and variation in DNA methylation from birth to late adolescence</a>bioRxiv 2020.06.09.142620"
+reference <- "Mulder, <i>et al</i>. <a href='https://doi.org/10.1101/2020.06.09.142620'>Epigenome-wide change and variation in DNA methylation from birth to late adolescence</a> bioRxiv 2020.06.09.142620"
 
 choices <- list("all"=1,
                 "M1 change estimate Bonferroni significant (1E-07)"=2,
@@ -66,7 +66,7 @@ declaration <- "By checking this box, I declare that I have read and agree with 
 
 disclaimer <- "Disclaimer<br/>The data are provided 'as is'. The party providing the data ('Provider') makes no representations and extends no warranties of any kind, either expressed or implied with respect to the data, such as but not limited to any representation or warranty on accuracy, completeness, availability, accessibility, fitness for a particular purpose, or that the use of the data will not infringe any rights of third parties. The Provider shall not be liable for any liability or damages with respect to any claim by the recipient or any third party arising from the use and/or download of the data. Recipient shall indemnify and hold harmless the Provider and its trustees, officers, employees and students against any and all claims arising out of the use and/or download of the data by the recipient."
 
-info <- "
+info <- "<b>Info</b>
 Three linear mixed models were tested
 
 M1:  M<sub>ijk</sub> = &beta;<sub>0</sub> + u<sub>0i</sub> + &beta;<sub>1</sub>Age<sub>ij</sub> + u<sub>1i</sub>Age<sub>ij</sub> + u<sub>0k</sub> + covariates + &epsilon;<sub>ijk</sub>
@@ -149,12 +149,11 @@ ui <- tagList(
                                          imageOutput(outputId = "Predicted_data_M2_bycohort")),
                                   column(5, h4("Model 3 - including sex differences in change"),
                                          imageOutput(outputId = "Predicted_data_M3_bysex")),
-                                  column(2, h4("Info"),
-                                         hidden(htmlOutput(outputId="info")),
+                         fluidRow(column(8, tableOutput("table_results")),
+                                  column(4,
                                          hidden(actionButton(inputId="info_button", label="more info")),
-                                         hidden(actionButton(inputId="info_button_less", label="less info")))), #
-                         fluidRow(column(10, tableOutput("table_results")),
-                                  column(2, hidden(htmlOutput(outputId="more_info")))))))
+                                         hidden(actionButton(inputId="info_button_less", label="less info")), 
+                                         hidden(htmlOutput(outputId="more_info")))))
 
 
 ######################
@@ -205,8 +204,8 @@ server <- function(input, output) {
         
         list(src = image_M2_bycohort, 
              contentType = 'image/png',
-             width = 420*0.75,
-             height = 420*0.75,
+             width = 420,
+             height = 420,
              title = "Model 2 - nonlinear changes",            
              alt = "Sorry something went wrong for this graph")
     }, deleteFile = FALSE)
@@ -218,8 +217,8 @@ server <- function(input, output) {
         
         list(src = image_M3_bysex, 
              contentType = 'image/png',
-             width = 420*0.75,
-             height = 420*.75,
+             width = 420,
+             height = 420,
              title = "Model 3 - sex differences",
              alt = "Sorry something went wrong for this graph")
     }, deleteFile = FALSE)
@@ -288,20 +287,24 @@ server <- function(input, output) {
 ###################
     observeEvent(input$info_button, {
         if(input$info_button)
-            show("more_info") &
-                show("info_button_less")
+            (show("more_info") &
+             show("info_button_less") &
+             hide("info_button"))
         else
-            hide("more_info") &
-                hide("info_button_less")
+            (hide("more_info") &
+             hide("info_button_less") &
+             show("info_button"))
     })
     
     observeEvent(input$info_button_less, {
         if(input$info_button_less)
-            hide("more_info") &
-                hide("info_button_less")
+            (hide("more_info") &
+             hide("info_button_less") &
+             show("info_button"))
         else
-            show("more_info") &
-                show("info_button_less")
+            (show("more_info") &
+             show("info_button_less") &
+             hide("info_button"))
     })
     
     
