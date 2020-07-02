@@ -153,7 +153,7 @@ ui <- tagList(
                                   column(4,
                                          hidden(actionButton(inputId="info_button", label="more info")),
                                          hidden(actionButton(inputId="info_button_less", label="less info")), 
-                                         hidden(htmlOutput(outputId="more_info")))))
+                                         hidden(htmlOutput(outputId="more_info"))))))))
 
 
 ######################
