@@ -140,7 +140,7 @@ ui <- tagList(
                             
                             hidden(selectInput(inputId="cpg_list_options",label="Load results",
                                         choices=choices)), 
-                            hidden(downloadButton(outputId="download_button", label="download statistics")),
+                            hidden(downloadButton(outputId="download_button", label="download")),
                             htmlOutput(outputId="info"),
                             width=2)),
                
