@@ -241,6 +241,7 @@ server <- function(input, output) {
                                              paste(model, variable_selections[[model]], sep=".")))
         names(variable_selections) <- variable_selections
         variable_selections <- gsub(" ", "", variable_selections)
+        variable_selections <- gsub("([0-9]+)y", "\\1", variable_selections)
         
         stat_selections <- list("b"="estimate",
                                 "se"="se",
