@@ -142,7 +142,7 @@ ui <- tagList(
                             selectInput(inputId="cpg_list_options",label="load results",
                                         choices=choices), 
                             hidden(downloadButton(outputId="download_button", label="download")),
-                            htmlOutput(outputID="info"),
+                            htmlOutput(outputId="info"),
                             width=2)),
                
                mainPanel(fluidRow(column(5, h4("Model 2 - including nonlinear changes"),
