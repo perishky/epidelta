@@ -52,7 +52,11 @@ p.threshold <- 1e-7
 ## Text
 ############
 
-reference <- "Mulder, <i>et al</i>. <b>Epigenome-wide change and variation in DNA methylation from birth to late adolescence</b>. bioRxiv 2020.06.09.142620 https://doi.org/10.1101/2020.06.09.142620"
+reference <- paste0("Preprint available: Mulder, R.H. <i>et al.</i> (2020) .",
+		    "<a href='https://doi.org/10.1101/2020.06.09.142620' >",
+ 		    "Epigenome-wide change and variation in DNA methylation from birth to late adolescence", 
+		    "</a>. ", 
+		    "bioRxiv 2020.06.09.142620")
 
 choices <- list("all"=1,
                 "M1 change estimate Bonferroni significant (1E-07)"=2,
@@ -124,7 +128,7 @@ ui <- tagList(
                windowTitle="epidelta project"),
     
     navbarPage("",
-               tabPanel(HTML(reference),
+               tabPanel(htmlOutput(outputId="reference"),
                         sidebarPanel(
                             useShinyjs(),   #to hide buttons
                             checkboxInput(inputId = "agree",label = strong(declaration),value = FALSE),
@@ -158,6 +162,8 @@ ui <- tagList(
 server <- function(input, output) {
     
     
+    output$reference <- renderUI(HTML(reference))
+
 ##################
 ###Show disclaimer
 ##################
