@@ -47,7 +47,7 @@ there are over 900K plots and the data uses 180Mb.
 To get a bash session in the running docker container:
 
 ```
-docker exec -it epidelta bash
+docker exec -it epidelta_prod bash
 ```
 
 Once in, it is possible to run basic linux commands
