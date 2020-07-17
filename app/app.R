@@ -52,11 +52,13 @@ p.threshold <- 1e-7
 ## Text
 ############
 
-reference <- paste0("Preprint available: Mulder, R.H. <i>et al.</i> ",
-		    "<a href='https://doi.org/10.1101/2020.06.09.142620'>",
+reference <- paste0("<div style='padding: 5px; font-size: 10pt; text-align: left'>",
+		    "Preprint available: Mulder, R.H. <i>et al.</i> ",
+		    "<a href='https://doi.org/10.1101/2020.06.09.142620' target='_blank'>",
  		    "Epigenome-wide change and variation in DNA methylation from birth to late adolescence", 
 		    "</a>. ", 
-		    "bioRxiv 2020.06.09.142620")
+		    "bioRxiv 2020.06.09.142620",
+		    "</div>")
 
 choices <- list("all"=1,
                 "M1 change estimate Bonferroni significant (1E-07)"=2,
@@ -108,27 +110,28 @@ Sex<sub>i</sub> denotes the sex of child i and was used to interpret stable sex 
 "  
 more_info <- unlist(strsplit(more_info, split="\n"))
 more_info <- paste(more_info, collapse="<br/>")
-
+more_info <- paste("<div class='well'>",more_info,"</div>")
 
 
 #################
 ###USER INTERFACE
 #################
-ui <- tagList(               
+ui <- fluidPage(               
   
-    titlePanel(fluidRow(column(5, tags$h1(tags$strong(tags$code("THE EPIDELTA PROJECT"))), align="center"),
-                        column(6, tags$img(src=file.path(logoloc,'Logo_EMC.png'),
+
+   titlePanel(fluidRow(column(5, tagList(h1(strong(code("THE EPIDELTA PROJECT"))),
+					 HTML(reference)), align="center"),
+                        column(6, img(src=file.path(logoloc,'Logo_EMC.png'),
                                            height = 137/2, width = 350/2, href="https://www.erasmusmc.nl/"),
-                                   tags$img(src=file.path(logoloc,'Logo_GenR.png'),
+                                   img(src=file.path(logoloc,'Logo_GenR.png'),
                                            height = 174/3, width = 240/3, href="https://generationr.nl/researchers/"),
-                                   tags$img(src=file.path(logoloc,'Logo_BristolUni.png'),
+                                   img(src=file.path(logoloc,'Logo_BristolUni.png'),
                                            height = 120/2.5, width = 418/2.5, href="https://www.bristol.ac.uk/"),
-                                   tags$img(src=file.path(logoloc,'Logo_ALSPAC.png'),
+                                   img(src=file.path(logoloc,'Logo_ALSPAC.png'),
                                            height = 229/2, width = 145/2, href="http://www.bristol.ac.uk/alspac/"))),
-               windowTitle="epidelta project"),
+              windowTitle="epidelta project"),
     
-    navbarPage("",
-               tabPanel(htmlOutput(outputId="reference"),
+    sidebarLayout(
                         sidebarPanel(
                             useShinyjs(),   #to hide buttons
                             checkboxInput(inputId = "agree",label = strong(declaration),value = FALSE),
@@ -142,18 +145,18 @@ ui <- tagList(
                                         choices=choices)), 
                             hidden(downloadButton(outputId="download_button", label="download")),
                             htmlOutput(outputId="info"),
-                            width=2)),
+			    width=2),
                
                mainPanel(fluidRow(column(6, hidden(htmlOutput(outputId="model2_title")),
                                          imageOutput(outputId = "Predicted_data_M2_bycohort")),
                                   column(6, hidden(htmlOutput(outputId="model3_title")),
-                                         imageOutput(outputId = "Predicted_data_M3_bysex")),
+                                         imageOutput(outputId = "Predicted_data_M3_bysex"))),
 			 fluidRow(column(12, h1(""))),
                          fluidRow(column(8, tableOutput("table_results")),
                                   column(4,
                                          hidden(actionButton(inputId="info_button", label="more info")),
                                          hidden(actionButton(inputId="info_button_less", label="less info")), 
-                                         hidden(htmlOutput(outputId="more_info"))))))))
+                                         hidden(htmlOutput(outputId="more_info")))))))
 
 
 ######################
@@ -162,7 +165,6 @@ ui <- tagList(
 server <- function(input, output) {
     
     
-    output$reference <- renderUI(HTML(reference))
 
 ##################
 ###Show disclaimer
@@ -195,6 +197,7 @@ server <- function(input, output) {
 ############
 ###Graph CpG
 ############
+    hide("info_button")
     data_cpg <- eventReactive(input$update, {
         validate(
             need(input$typeCpG %in% rownames(epidelta),
@@ -205,7 +208,7 @@ server <- function(input, output) {
         input$typeCpG
     })
 
-    output$model2_title <- renderUI(HTML("<h4 style='white-space: nowrap'>Model 2- including nonlinear changes</h4>"))
+    output$model2_title <- renderUI(HTML("<h3 style='white-space: nowrap'>Model 2 - including nonlinear changes</h4>"))
     ##long plot from results                  
     output$Predicted_data_M2_bycohort <- renderImage({
         graphname_M2_bycohort <- cpgfigure(data_cpg(),'_M2_bycohort_200326.png')
@@ -219,7 +222,7 @@ server <- function(input, output) {
              alt = "Sorry something went wrong for this graph")
     }, deleteFile = FALSE)
     
-    output$model3_title <- renderUI(HTML("<h4 style='white-space: nowrap'>Model 3 - including sex differences in change</h4>"))
+    output$model3_title <- renderUI(HTML("<h3 style='white-space: nowrap'>Model 3 - including sex differences in change</h4>"))
     output$Predicted_data_M3_bysex <- renderImage({      
         graphname_M3_bysex    <- cpgfigure(data_cpg(),'_M3_bysex_200326.png')
         image_M3_bysex        <- graphname_M3_bysex
