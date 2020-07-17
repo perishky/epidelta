@@ -280,13 +280,16 @@ server <- function(input, output) {
         }else if(input$cpg_list_options==7){
             epideltadata <- epidelta[epidelta$M3.changebysex.p<p.threshold,]
         }
+        epideltadata
     })
     
     output$download_button <- downloadHandler(                
-        filename = function(){
-            paste("epidelta_", Sys.Date(),".txt", sep='\t')},
-        
-        content= function(file){write.table(data_epideltaresults(), file, row.names=TRUE)})
+        filename = function() {
+            paste("epidelta_", Sys.Date(),".txt", sep='')
+        },        
+        content = function(file){
+            write.table(data_epideltaresults(), file, sep="\t", row.names=TRUE)
+        })
     
 
 ################
