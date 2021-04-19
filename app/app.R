@@ -29,7 +29,8 @@ logoloc   <- "logos"
 #######
 ###Load
 #######
-load(file.path(dfloc,"epidelta_df_200108.RData"))
+#load(file.path(dfloc,"epidelta_df_200108.RData"))
+load(file.path(dfloc,"epidelta_df_201208.RData"))
 
 
 
@@ -53,11 +54,11 @@ p.threshold <- 1e-7
 ############
 
 reference <- paste0("<div style='padding: 5px; font-size: 10pt; text-align: left'>",
-		    "Preprint available: Mulder, R.H. <i>et al.</i> ",
-		    "<a href='https://doi.org/10.1101/2020.06.09.142620' target='_blank'>",
+		    "<b>Publication</b>: Mulder, R.H. <i>et al.</i> ",
+		    "<a href='https://doi.org/10.1093/hmg/ddaa280' target='_blank'>",
  		    "Epigenome-wide change and variation in DNA methylation from birth to late adolescence", 
 		    "</a>. ", 
-		    "bioRxiv 2020.06.09.142620",
+		    "Hum Mol Genet. 2021 Mar 25;30(1):119-134.",
 		    "</div>")
 
 choices <- list("all"=1,
@@ -205,6 +206,8 @@ server <- function(input, output) {
 	show("model2_title")
 	show("model3_title")
 	show("info_button")
+        hide("more_info") 
+        hide("info_button_less") 
         input$typeCpG
     })
 
@@ -239,7 +242,7 @@ server <- function(input, output) {
     output$table_results <- renderTable({
         variable_selections <- list("M1"=c("intercept","change"),
                                     "M2"=c("intercept","change","slope change at 6y","slope change at 9y"),
-                                    "M3"=c("intercept","change","sex","change by sex"))
+                                    "M3"=c("intercept","change","sex (boy)","change by sex"))
         variable_selections <- unlist(lapply(names(variable_selections), function(model)
                                              paste(model, variable_selections[[model]], sep=".")))
         names(variable_selections) <- variable_selections

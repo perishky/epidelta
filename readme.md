@@ -6,13 +6,13 @@ using data generated for participants in
 [ALSPAC](http://www.bristol.ac.uk/alspac/)
 and [Generation R](https://generationr.org.uk/).
 
-> Rosa H. Mulder, Alexander Neumann, Charlotte A. M. Cecil, Esther
-> Walton, Lotte C. Houtepen, Andrew J. Simpkin, Jolien Rijlaarsdam,
-> Bastiaan T. Heijmans, Tom R. Gaunt, Janine F. Felix, Vincent
-> W. V. Jaddoe, Marian J. Bakermans-Kranenburg, Henning Tiemeier,
-> Caroline L. Relton, Marinus H. van IJzendoorn, Matthew Suderman.
-> [Epigenome-wide change and variation in DNA methylation from birth to late adolescence](https://doi.org/10.1101/2020.06.09.142620)
-> bioRxiv 2020.06.09.142620; doi: https://doi.org/10.1101/2020.06.09.142620
+> Mulder RH, Neumann A, Cecil CAM, Walton E, Houtepen LC, Simpkin AJ,
+> Rijlaarsdam J, Heijmans BT, Gaunt TR, Felix JF, Jaddoe VWV,
+> Bakermans-Kranenburg MJ, Tiemeier H, Relton CL, van IJzendoorn MH,
+> Suderman M. Epigenome-wide change and variation in DNA methylation in
+> childhood: trajectories from birth to late adolescence. Hum Mol
+> Genet. 2021 Mar 25;30(1):119-134. doi: 10.1093/hmg/ddaa280. PMID:
+> 33450751; PMCID: PMC8033147.
 
 The app is implemented in R
 using [Shiny](https://shiny.rstudio.com/).
