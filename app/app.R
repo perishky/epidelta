@@ -248,6 +248,7 @@ server <- function(input, output) {
         names(variable_selections) <- variable_selections
         variable_selections <- gsub(" ", "", variable_selections)
         variable_selections <- gsub("at([0-9]+)y", "\\1", variable_selections)
+        variable_selections <- gsub("(boy)", "", variable_selections, fixed=T)
         
         stat_selections <- list("b"="estimate",
                                 "se"="se",
